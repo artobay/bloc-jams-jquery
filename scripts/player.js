@@ -36,8 +36,16 @@ class Player {
       this.playState = 'paused';
       this.currentlyPlaying.element.removeClass('playing').addClass('paused');
     }
+	  
+	 $('#time-control .total-time').text(player.currentlyPlaying.duration); 
   }
   
+	prettyTime (timeInSeconds) {
+    const minutes = (Math.floor(timeInSeconds/60))
+    const seconds = (timeInSeconds%60)
+    return minutes + ':' + seconds;
+  }
+	
   skipTo (percent) {
     if (this.playState !== 'playing') { return }
     this.soundObject.setTime( (percent / 100) * this.soundObject.getDuration() );
